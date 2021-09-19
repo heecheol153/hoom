@@ -1,3 +1,3 @@
 # Hoom
 
-Zoom Clone using NodeJS, WebRTC Websockets.
+Zoom Clone using NodeJS, WebRTC and Websockets.

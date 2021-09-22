@@ -25,8 +25,18 @@ wss.on("connection", (socket) => {
   sockets.push(socket);
   console.log("Connected to Browser ✅");
   socket.on("close", onSocketClose);
-  socket.on("message", (message) => {
-    sockets.forEach((aSocket) => aSocket.send(message));
+  socket.on("message", (msg) => {
+    const message = JSON.parse(msg);
+    switch (message.type) {
+      case "new_message":
+        sockets.forEach((aSocket) =>
+          aSocket.send(`${socket.nickname}:${message.payload}`)
+        );
+      //console.log(parsed, message.toString("utf8"));
+      case "nickname":
+        socket["nickname"] = message.payload;
+      //console.log(message.payload);
+    }
   });
 });
 
